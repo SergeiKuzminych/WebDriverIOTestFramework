@@ -107,4 +107,5 @@ dist
 reports/
 
 # Error Screenshots
-errorShots/
+errorShots/*
+!errorShots/.gitkeep 
