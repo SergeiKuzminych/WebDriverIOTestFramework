@@ -8,8 +8,8 @@ describe('Contact Us Challenge Test', () => {
 		const url = browser.getUrl();
 		const title = browser.getTitle();
 
-		expect(title).to.equal('WebDriverUniversity.com');
-		expect(url).to.equal('http://webdriveruniversity.com/');
+		expect(title).toMatch('WebDriverUniversity.com');
+		expect(url).toMatch('http://webdriveruniversity.com/');
 	});
 
 	it('Click on the contact us button.', () => {
@@ -36,6 +36,6 @@ describe('Contact Us Challenge Test', () => {
 		const url = browser.getUrl();
 		const thankYouMessage = $('#contact_reply h1');
 		thankYouMessage.waitForDisplayed(3000);
-		expect(url).to.contain('contact-form-thank-you');
+		expect(url).toContain('contact-form-thank-you');
 	});
 });

@@ -20,8 +20,10 @@ exports.config = {
 	//
 	specs: ['./tests/**/*.js'],
 	suites: {
+		googlestore: [
+			'./tests/google_store/google-store.js'
+		],
 		contactus: [
-			'./tests/challenge-test.js',
 			'./tests/input-test.js',
 			'./tests/manage-window-test.js',
 		],
@@ -212,8 +214,6 @@ exports.config = {
 	 * @param {Object}         browser      instance of created browser/device session
 	 */
 	before: function (capabilities, specs) {
-		expect = require('chai').expect;
-
 		browser.addCommand('getUrlAndTitle', () => {
 			return {
 				url: browser.getUrl(),
@@ -327,8 +327,15 @@ exports.config = {
 	 * @param {Array.<Object>} capabilities list of capabilities details
 	 * @param {<Object>} results object containing test results
 	 */
-	// onComplete: function(exitCode, config, capabilities, results) {
-	// },
+	onComplete: function(exitCode, config, capabilities, results) {
+		const allure = require('allure-commandline');
+
+		let generation = allure(['generate', './reports/allure']);
+
+		generation.on('exit', function(exitCode) {
+    		console.log('Generation is finished with code:', exitCode);
+		});
+	},
 	/**
 	 * Gets executed when a refresh happens.
 	 * @param {String} oldSessionId session ID of the old session
